@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrations</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+    <div class="navigation-buttons">
+        <a href="/clients"><button>Clients</button></a>
+        <a href="/registrations"><button>Registrations</button></a>
+        <a href="/workouts"><button>Workouts</button></a>
+    </div>
+    
+    <h1>Registrations</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Registration ID</th>
+                <th>Client ID</th>
+                <th>Workout ID</th>
+                <th>Registration Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="registration : ${registrations}">
+                <td th:text="${registration.id}">ID</td>
+                <td th:text="${registration.client.id}">Client ID</td>
+                <td th:text="${registration.workout.id}">Workout ID</td>
+                <td th:text="${registration.registrationDate}">Registration Date</td>
+                <td>
+                    <form th:action="@{/registrations/delete/{id}(id=${registration.id})}" method="get">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="centered-button">
+        <a href="/registrations/add"><button>Add Registration</button></a>
+    </div>
+</body>
+</html>

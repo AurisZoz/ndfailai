@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Workouts</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+    <div class="navigation-buttons">
+        <a href="/clients"><button>Clients</button></a>
+        <a href="/registrations"><button>Registrations</button></a>
+        <a href="/workouts"><button>Workouts</button></a>
+    </div>
+    
+    <h1>Workouts</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Workout ID</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Places</th>
+                <th>Location</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="workout : ${workouts}">
+                <td th:text="${workout.id}">ID</td>
+                <td th:text="${workout.name}">Name</td>
+                <td th:text="${workout.date}">Date</td>
+                <td th:text="${workout.places}">Places</td>
+                <td th:text="${workout.location}">Location</td>
+                <td>
+                    <a th:href="@{/workouts/update/{id}(id=${workout.id})}"><button>Update</button></a>
+                    
+                    <form th:action="@{/workouts/delete/{id}(id=${workout.id})}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="centered-button">
+    <a href="/workouts/add"><button>Add Workout</button></a>
+    </div>
+</body>
+</html>

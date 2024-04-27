@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Clients</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+    <div class="navigation-buttons">
+        <a href="/clients"><button>Clients</button></a>
+        <a href="/registrations"><button>Registrations</button></a>
+        <a href="/workouts"><button>Workouts</button></a>
+    </div>
+    
+    <h1>Clients</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Client ID</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Document</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="client : ${clients}">
+                <td th:text="${client.id}">ID</td>
+                <td th:text="${client.name}">Name</td>
+                <td th:text="${client.surname}">Surname</td>
+                <td th:text="${client.email}">Email</td>
+                <td th:text="${client.phone}">Phone</td>
+                <td>
+                    <span th:if="${client.document != null and client.document.length > 0}">
+                        <a th:href="@{'/clients/download/' + ${client.id}}"><button>Download Document</button></a>
+                    </span>
+                    <span th:if="${client.document == null or client.document.length == 0}">No Document</span>
+                </td>
+                <td>
+                    <a th:href="@{/clients/update/{id}(id=${client.id})}"><button>Update</button></a>
+                    
+                    <form th:action="@{'/clients/delete/' + ${client.id}}" method="post">
+                        <input type="hidden" name="id" th:value="${client.id}" />
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="centered-button">
+        <a href="/clients/add"><button>Add Client</button></a>
+    </div>
+</body>
+</html>

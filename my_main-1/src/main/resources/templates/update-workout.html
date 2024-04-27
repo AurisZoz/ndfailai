@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Workout</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+        <style>
+        form {
+            margin: 0 auto; 
+            width: 300px;   
+            text-align: center; 
+        }
+    </style>
+</head>
+<body>
+        <div class="navigation-buttons">
+        <a href="/clients"><button>Clients</button></a>
+        <a href="/registrations"><button>Registrations</button></a>
+        <a href="/workouts"><button>Workouts</button></a>
+    </div>
+
+    <h1>Update Workout</h1>
+    <form th:action="@{/workouts/update/{id}(id=${workout.id})}" method="post">
+        <input type="hidden" name="id" th:value="${workout.id}" />
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:value="${workout.name}" required><br>
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" th:value="${workout.date}" required><br>
+        <label for="places">Places:</label>
+        <input type="number" id="places" name="places" th:value="${workout.places}" required><br>
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" th:value="${workout.location}" required><br>
+        <button type="submit">Update Workout</button>
+    </form>
+</body>
+</html>

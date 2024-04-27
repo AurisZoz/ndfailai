@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Registration</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <style>
+        form {
+            margin: 0 auto; 
+            width: 300px;   
+            text-align: center; 
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation-buttons">
+        <a href="/clients"><button>Clients</button></a>
+        <a href="/registrations"><button>Registrations</button></a>
+        <a href="/workouts"><button>Workouts</button></a>
+    </div>
+    
+    <h1>Add Registration</h1>
+    
+    <form th:action="@{/registrations/add}" method="post">
+        <label for="clientId">Client:</label>
+        <select id="clientId" name="clientId" required>
+            <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.id + ' - ' + client.name + ' ' + client.surname + ' - ' + client.email}"></option>
+        </select><br>
+        <label for="workoutId">Workout:</label>
+        <select id="workoutId" name="workoutId" required>
+            <option th:each="workout : ${workouts}" th:value="${workout.id}" th:text="${workout.name}"></option>
+        </select><br>
+        <label for="registrationDate">Registration Date:</label>
+        <input type="date" id="registrationDate" name="registrationDate" required><br>
+        <button type="submit">Add Registration</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Registration</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+    <div class="navigation-buttons">
+        <a href="/clients"><button>Clients</button></a>
+        <a href="/registrations"><button>Registrations</button></a>
+        <a href="/workouts"><button>Workouts</button></a>
+    </div>
+
+    <h1>Update Registration</h1>
+    <form th:action="@{/registrations/update/{id}(id=${registration.id})}" method="post" th:object="${registration}">
+        <input type="hidden" id="id" th:field="*{id}" />
+        <label for="clientId">Client:</label>
+        <select id="clientId" name="client.id">
+            <option th:each="client : ${clients}" th:value="${client.id}" th:text="${client.name + ' ' + client.surname}"></option>
+        </select><br>
+        <label for="workoutId">Workout:</label>
+        <select id="workoutId" name="workout.id">
+            <option th:each="workout : ${workouts}" th:value="${workout.id}" th:text="${workout.name}"></option>
+        </select><br>
+        <label for="registrationDate">Registration Date:</label>
+        <input type="date" id="registrationDate" name="registrationDate" th:value="${registration.registrationDate}" required><br>
+        <button type="submit">Update Registration</button>
+    </form>
+</body>
+</html>

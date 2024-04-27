@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Client</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <style>
+        form {
+            margin: 0 auto; 
+            width: 300px;   
+            text-align: center; 
+        }
+        .error-message {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation-buttons">
+        <a href="/clients"><button>Clients</button></a>
+        <a href="/registrations"><button>Registrations</button></a>
+        <a href="/workouts"><button>Workouts</button></a>
+    </div>
+    
+    <h1>Add Client</h1>
+    
+   <form th:action="@{/clients/add}" method="post" th:object="${client}">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" th:field="*{name}" />
+        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-message"></span>
+    </div>
+    <div>
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" th:field="*{surname}" />
+        <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}" class="error-message"></span>
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" th:field="*{email}" />
+        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="error-message"></span>
+    </div>
+    <div>
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" th:field="*{phone}" />
+        <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="error-message"></span>
+    </div>
+      <div>
+            <label for="document">Document:</label>
+            <input type="file" id="document" name="document" />
+        </div>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

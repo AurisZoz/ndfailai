@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Workout</title>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+</head>
+<body>
+    <h1>Delete Workout</h1>
+    <form th:action="@{/workouts/delete/{id}(id=${workout.id})}" method="post">
+        <input type="hidden" name="id" th:value="${workout.id}" />
+        <p>Are you sure you want to delete workout: <strong th:text="${workout.name}"></strong>?</p>
+        <button type="submit">Delete Workout</button>
+    </form>
+</body>
+</html>
